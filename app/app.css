@@ -1,3 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+    --bg-color: #0e0e0e;
+    --text-color: #e6edf3;
+    --pink-accent: #ff90e8;
+    --blue-accent: #90e8ff;
+    --purple-accent: #bd93f9;
+    --dim-border: #30363d;
+    --output-color: #a1aab4;
+    --suggestion-bg: #161b22;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Space Mono', monospace;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.terminal-container {
+    width: 100%;
+    height: 100%;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+/* The Retro Title Container */
+.hero-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    transform: scale(0.9);
+}
+
+@media (min-width: 768px) {
+    .hero-section {
+        transform: scale(1);
+    }
+}
+
+/* The Big Pink Arrow */
+.pixel-arrow {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    color: var(--pink-accent);
+    margin-right: 1.5rem;
+    text-shadow: 3px 3px 0px rgba(255, 144, 232, 0.3);
+    animation: pulse 2s infinite;
+}
+
+/* The Main "RAZERTORY" Text */
+.pixel-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    line-height: 1.4;
+    letter-spacing: -2px;
+    background: linear-gradient(90deg, #ff90e8 0%, #bd93f9 40%, #90e8ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(4px 4px 0px rgba(45, 45, 45, 1));
+    position: relative;
+}
+
+/* Tips Section */
+.tips-container {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+}
+
+.tips-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #c9d1d9;
+}
+
+.tips-list {
+    list-style: none;
+    padding: 0;
+    color: #c9d1d9;
+}
+
+.tips-list li {
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.tips-list li::before {
+    content: "*";
+    margin-right: 0.75rem;
+    color: var(--pink-accent);
+}
+
+.highlight-cmd {
+    color: var(--pink-accent);
+    font-weight: bold;
+}
+
+/* Input & Output Lines */
+.input-wrapper {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #c9d1d9;
+}
+
+.prompt-char {
+    color: var(--pink-accent);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.cmd-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    flex-grow: 1;
+    caret-color: var(--text-color);
+}
+
+.output-line {
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    padding-left: 24px; /* Align with input text */
+    color: var(--output-color);
+    white-space: pre-wrap; /* Allows wrapping of long lines */
+}
+
+.output-line a {
+    color: var(--blue-accent);
+    text-decoration: underline;
+}
+
+/* Suggestions */
+.suggestions-container {
+    background-color: var(--suggestion-bg);
+    border: 1px solid var(--dim-border);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem;
+    max-width: 800px;
+}
+
+.suggestion-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.suggestion-command {
+    color: var(--text-color);
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.suggestion-description {
+    color: var(--output-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestion-item.selected {
+    background-color: var(--blue-accent);
+}
+
+.suggestion-item.selected .suggestion-command,
+.suggestion-item.selected .suggestion-description {
+    color: var(--bg-color);
+}
+
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Scanline effect overlay */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+}
+
 @import "tailwindcss" source(".");
 
 @theme {
@@ -6,11 +213,4 @@
 		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-html,
-body {
-	@apply bg-white dark:bg-gray-950;
 
-	@media (prefers-color-scheme: dark) {
-		color-scheme: dark;
-	}
-}
